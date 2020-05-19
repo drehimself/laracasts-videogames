@@ -2,7 +2,7 @@
     @forelse ($popularGames as $game)
         <div class="game mt-8">
             <div class="relative inline-block">
-                <a href="#">
+                <a href="{{ route('games.show', $game['slug']) }}">
                     <img src="{{ Str::replaceFirst('thumb', 'cover_big', $game['cover']['url']) }}" alt="game cover" class="hover:opacity-75 transition ease-in-out duration-150">
                 </a>
                 @if (isset($game['rating']))
@@ -13,7 +13,7 @@
                     </div>
                 @endif
             </div>
-            <a href="#" class="block text-base font-semibold leading-tight hover:text-gray-400 mt-8">{{ $game['name'] }}</a>
+            <a href="{{ route('games.show', $game['slug']) }}" class="block text-base font-semibold leading-tight hover:text-gray-400 mt-8">{{ $game['name'] }}</a>
             <div class="text-gray-400 mt-1">
                 @foreach ($game['platforms'] as $platform)
                     @if (array_key_exists('abbreviation', $platform))
@@ -23,6 +23,14 @@
             </div>
         </div>
     @empty
-        <div class="spinner mt-8"></div>
+        @foreach (range(1, 12) as $game)
+            <div class="game mt-8">
+                <div class="relative inline-block">
+                    <div class="bg-gray-800 w-44 h-56"></div>
+                </div>
+                <div class="block text-transparent text-lg bg-gray-700 rounded leading-tight mt-4">Title goes here</div>
+                <div class="text-transparent bg-gray-700 rounded inline-block mt-3">PS4, PC, Switch</div>
+            </div>
+        @endforeach
     @endforelse
 </div> <!-- end popular-games -->
