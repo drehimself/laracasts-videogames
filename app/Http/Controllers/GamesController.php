@@ -101,7 +101,7 @@ class GamesController extends Controller
             'platforms' => collect($game['platforms'])->pluck('abbreviation')->implode(', '),
             'memberRating' => array_key_exists('rating', $game) ? round($game['rating']) : '0',
             'criticRating' => array_key_exists('aggregated_rating', $game) ? round($game['aggregated_rating']) : '0',
-            'trailer' => 'https://youtube.com/watch/'.$game['videos'][0]['video_id'],
+            'trailer' => 'https://youtube.com/embed/'.$game['videos'][0]['video_id'],
             'screenshots' => collect($game['screenshots'])->map(function ($screenshot) {
                 return [
                     'big' => Str::replaceFirst('thumb', 'screenshot_big', $screenshot['url']),
@@ -111,7 +111,7 @@ class GamesController extends Controller
             'similarGames' => collect($game['similar_games'])->map(function ($game) {
                 return collect($game)->merge([
                     'coverImageUrl' => array_key_exists('cover', $game)
-                        ? Str::replaceFirst('thumb','cover_big', $game['cover']['url'])
+                        ? Str::replaceFirst('thumb', 'cover_big', $game['cover']['url'])
                         : 'https://via.placeholder.com/264x352',
                     'rating' => isset($game['rating']) ? round($game['rating']) : null,
                     'platforms' => array_key_exists('platforms', $game)
