@@ -14,7 +14,7 @@ class PopularGamesTest extends TestCase
     public function the_main_page_shows_popular_games()
     {
         Http::fake([
-            'https://api-v3.igdb.com/games' => $this->fakePopularGames(),
+            config('services.igdb.endpoint') => $this->fakePopularGames(),
         ]);
 
         Livewire::test(PopularGames::class)

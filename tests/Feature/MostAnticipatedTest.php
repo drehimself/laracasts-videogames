@@ -14,7 +14,7 @@ class MostAnticipatedTest extends TestCase
     public function the_main_page_shows_most_anticipated_games()
     {
         Http::fake([
-            'https://api-v3.igdb.com/games' => $this->fakeMostAnticipatedGames(),
+            config('services.igdb.endpoint') => $this->fakeMostAnticipatedGames(),
         ]);
 
         Livewire::test(MostAnticipated::class)
@@ -118,5 +118,3 @@ class MostAnticipatedTest extends TestCase
         ], 200);
     }
 }
-
-

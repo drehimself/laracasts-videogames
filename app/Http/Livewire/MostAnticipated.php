@@ -16,17 +16,17 @@ class MostAnticipated extends Component
         $current = Carbon::now()->timestamp;
         $afterFourMonths = Carbon::now()->addMonths(4)->timestamp;
 
-        $mostAnticipatedUnformatted = Http::withHeaders(config('services.igdb'))
-            ->withOptions([
-                'body' => "
-                    fields name, cover.url, first_release_date, popularity, platforms.abbreviation, rating, rating_count, summary, slug;
+        // Most Anticipated is not very accurate without the popularity field anymore :(
+        $mostAnticipatedUnformatted = Http::withHeaders(config('services.igdb.headers'))
+            ->withBody(
+                "fields name, cover.url, first_release_date, total_rating_count, platforms.abbreviation, rating, rating_count, summary, slug;
                     where platforms = (48,49,130,6)
                     & (first_release_date >= {$current}
-                    & first_release_date < {$afterFourMonths});
-                    sort popularity desc;
-                    limit 4;
-                "
-            ])->get('https://api-v3.igdb.com/games')
+                    & first_release_date < {$afterFourMonths}
+                    );
+                    sort total_rating_count desc;
+                    limit 4;", "text/plain"
+            )->post(config('services.igdb.endpoint'))
             ->json();
 
         $this->mostAnticipated = $this->formatForView($mostAnticipatedUnformatted);

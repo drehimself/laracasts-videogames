@@ -14,7 +14,7 @@ class ComingSoonTest extends TestCase
     public function the_main_page_shows_coming_soon_games()
     {
         Http::fake([
-            'https://api-v3.igdb.com/games' => $this->fakeComingSoonGames(),
+            config('services.igdb.endpoint') => $this->fakeComingSoonGames(),
         ]);
 
         Livewire::test(ComingSoon::class)
@@ -139,5 +139,3 @@ class ComingSoonTest extends TestCase
             ], 200);
     }
 }
-
-

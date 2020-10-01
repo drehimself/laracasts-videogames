@@ -12,7 +12,7 @@ class ViewGameTest extends TestCase
     public function the_game_page_shows_correct_game_info()
     {
         Http::fake([
-            'https://api-v3.igdb.com/games' => $this->fakeSingleGame(),
+            config('services.igdb.endpoint') => $this->fakeSingleGame(),
         ]);
 
         $response = $this->get(route('games.show', 'fake-animal-crossing-new-horizons'));

@@ -14,7 +14,7 @@ class SearchDropdownTest extends TestCase
     public function the_search_dropdown_searches_for_games()
     {
         Http::fake([
-            'https://api-v3.igdb.com/games' => $this->fakeSearchGames(),
+            config('services.igdb.endpoint') => $this->fakeSearchGames(),
         ]);
 
         Livewire::test(SearchDropdown::class)
@@ -120,5 +120,3 @@ class SearchDropdownTest extends TestCase
         ], 200);
     }
 }
-
-

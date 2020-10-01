@@ -14,7 +14,7 @@ class RecentlyReviewedTest extends TestCase
     public function the_main_page_shows_recently_reviewed_games()
     {
         Http::fake([
-            'https://api-v3.igdb.com/games' => $this->fakeRecentlyReviewedGames(),
+            config('services.igdb.endpoint') => $this->fakeRecentlyReviewedGames(),
         ]);
 
         Livewire::test(RecentlyReviewed::class)
@@ -114,5 +114,3 @@ class RecentlyReviewedTest extends TestCase
         ], 200);
     }
 }
-
-
