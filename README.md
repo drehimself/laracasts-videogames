@@ -2,6 +2,8 @@
 
 # Laracasts Video Game Series
 
+**IGDB API has been updated to v4** on the [v4 branch](https://github.com/drehimself/laracasts-videogames/tree/v4).
+
 Code for Laracasts video series: https://laracasts.com/series/build-a-video-game-aggregator
 
 ## Installation
@@ -22,4 +24,3 @@ If you would like to follow along and start from a particular point, follow thes
 
 1. Clone the repo and `cd` into it
 1. `git checkout 07dbc21`
-
